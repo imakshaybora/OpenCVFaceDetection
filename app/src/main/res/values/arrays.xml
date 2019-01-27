@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="camera_array">
+        <item name="0">Front</item>
+        <item name="1">Back</item>
+    </string-array>
+</resources>
