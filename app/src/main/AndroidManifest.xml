@@ -20,7 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OpenCVActivity" />
+        <activity android:name=".OpenCVActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden"/>
     </application>
     <supports-screens android:resizeable="true"
         android:smallScreens="true"

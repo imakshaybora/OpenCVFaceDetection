@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -33,6 +36,7 @@ public class OpenCVActivity extends Activity
     private Mat grayscaleImage;
     private int absoluteFaceSize;
     private static final String TAG = "OpenCVActivity";
+    private Button stopButton;
     private int mCameraId = 0;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
@@ -78,15 +82,27 @@ public class OpenCVActivity extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.open_cv_activity);
         Log.d("verify openCV", String.valueOf(OpenCVLoader.initDebug()));
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         Bundle bundle = getIntent().getExtras();
         if (null != bundle) {
             mCameraId = bundle.getInt("camera_picked");
         }
-        openCvCameraView = new JavaCameraView(this, mCameraId);
-        setContentView(openCvCameraView);
+        openCvCameraView = (JavaCameraView) findViewById(R.id
+                .show_camera_activity_java_surface_view);
+        stopButton = findViewById(R.id.stop_btn);
+        openCvCameraView.setCameraIndex(mCameraId);
+        openCvCameraView.setVisibility(SurfaceView.VISIBLE);
         openCvCameraView.setCvCameraViewListener(this);
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCvCameraView.setVisibility(SurfaceView.GONE);
+                openCvCameraView.disableView();
+                finish();
+            }
+        });
     }
 
     @Override

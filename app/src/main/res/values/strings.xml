@@ -2,4 +2,5 @@
     <string name="app_name">FaceDetection</string>
     <string name="detect_faces">Detect Faces</string>
     <string name="pick_camera">Pick Camera</string>
+    <string name="stop">STOP</string>
 </resources>
